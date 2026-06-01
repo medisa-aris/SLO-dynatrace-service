@@ -43,7 +43,7 @@ A Python FastAPI banking application purpose-built to demonstrate **Service Leve
                                   ▼
                     ┌─────────────────────────┐
                     │   Dynatrace Tenant      │
-                    │  <your-env>.apps.       │
+                    │  <your-env>.live.       │
                     │  dynatrace.com          │
                     │                         │
                     │  /otlp/v1/traces        │
@@ -87,7 +87,7 @@ Both run methods rely on the same variables. `DT_ENDPOINT_BASE` and `DT_API_TOKE
 
 | Variable | Required | Default | Description |
 |---|---|---|---|
-| `DT_ENDPOINT_BASE` | **Yes** | *(empty)* | Dynatrace OTLP base URL — `https://<env-id>.apps.dynatrace.com/api/v2/otlp/v1` |
+| `DT_ENDPOINT_BASE` | **Yes** | *(empty)* | Dynatrace OTLP base URL — `https://<env-id>.live.dynatrace.com/api/v2/otlp/v1` |
 | `DT_API_TOKEN` | **Yes** | *(empty)* | Dynatrace API token — needs `openTelemetryTrace.ingest`, `metrics.ingest`, `logs.ingest` scopes |
 | `SERVICE_NAME` | No | `banking-api` | OTel `service.name` shown in Dynatrace |
 | `SERVICE_VERSION` | No | `1.0.0` | OTel `service.version` resource attribute |
@@ -125,7 +125,7 @@ py -3 -m playwright install chromium
 Create a `.env` file in the project root (it is git-ignored):
 
 ```env
-DT_ENDPOINT_BASE=https://<your-env-id>.apps.dynatrace.com/api/v2/otlp/v1
+DT_ENDPOINT_BASE=https://<your-env-id>.live.dynatrace.com/api/v2/otlp/v1
 DT_API_TOKEN=dt0c01.XXXX...
 ```
 
@@ -133,15 +133,15 @@ Or export them as shell variables:
 
 ```bash
 # Linux / macOS
-export DT_ENDPOINT_BASE="https://<your-env-id>.apps.dynatrace.com/api/v2/otlp/v1"
+export DT_ENDPOINT_BASE="https://<your-env-id>.live.dynatrace.com/api/v2/otlp/v1"
 export DT_API_TOKEN="dt0c01.XXXX..."
 
 # Windows PowerShell
-$env:DT_ENDPOINT_BASE = "https://<your-env-id>.apps.dynatrace.com/api/v2/otlp/v1"
+$env:DT_ENDPOINT_BASE = "https://<your-env-id>.live.dynatrace.com/api/v2/otlp/v1"
 $env:DT_API_TOKEN     = "dt0c01.XXXX..."
 
 # Windows CMD
-set DT_ENDPOINT_BASE=https://<your-env-id>.apps.dynatrace.com/api/v2/otlp/v1
+set DT_ENDPOINT_BASE=https://<your-env-id>.live.dynatrace.com/api/v2/otlp/v1
 set DT_API_TOKEN=dt0c01.XXXX...
 ```
 
@@ -222,7 +222,7 @@ docker build -t banking-api .
 docker run -d \
   --name banking-api \
   -p 8000:8000 \
-  -e DT_ENDPOINT_BASE="https://<your-env-id>.apps.dynatrace.com/api/v2/otlp/v1" \
+  -e DT_ENDPOINT_BASE="https://<your-env-id>.live.dynatrace.com/api/v2/otlp/v1" \
   -e DT_API_TOKEN="dt0c01.XXXX..." \
   -e DB_URL="sqlite:////app/data/banking.db" \
   -v banking-db:/app/data \
@@ -235,7 +235,7 @@ docker run -d \
 docker run -d `
   --name banking-api `
   -p 8000:8000 `
-  -e DT_ENDPOINT_BASE="https://<your-env-id>.apps.dynatrace.com/api/v2/otlp/v1" `
+  -e DT_ENDPOINT_BASE="https://<your-env-id>.live.dynatrace.com/api/v2/otlp/v1" `
   -e DT_API_TOKEN="dt0c01.XXXX..." `
   -e DB_URL="sqlite:////app/data/banking.db" `
   -v banking-db:/app/data `
@@ -278,7 +278,7 @@ docker run --rm \
 Create `.env.docker` in the project root (never commit this file — it is listed in `.dockerignore`):
 
 ```env
-DT_ENDPOINT_BASE=https://<your-env-id>.apps.dynatrace.com/api/v2/otlp/v1
+DT_ENDPOINT_BASE=https://<your-env-id>.live.dynatrace.com/api/v2/otlp/v1
 DT_API_TOKEN=dt0c01.XXXX...
 SERVICE_NAME=banking-api
 DEPLOYMENT_ENVIRONMENT=demo
@@ -304,7 +304,7 @@ docker build -t banking-api .
 
 # Start API
 docker run -d --name banking-api -p 8000:8000 \
-  -e DT_ENDPOINT_BASE="https://<env-id>.apps.dynatrace.com/api/v2/otlp/v1" \
+  -e DT_ENDPOINT_BASE="https://<env-id>.live.dynatrace.com/api/v2/otlp/v1" \
   -e DT_API_TOKEN="dt0c01.XXXX..." \
   -e DB_URL="sqlite:////app/data/banking.db" \
   -v banking-db:/app/data \
